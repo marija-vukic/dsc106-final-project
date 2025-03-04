@@ -4,3 +4,4 @@ finalproject/data/wearable_data.json
 # Optional: Ignore all JSON files in the "data" folder EXCEPT reduced_wearable_data.json
 finalproject/data/*.json
 !finalproject/data/reduced_wearable_data.json
+.DS_Store
