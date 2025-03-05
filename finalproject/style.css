@@ -7,6 +7,10 @@ body {
 h1 {
     margin-bottom: 10px;
 }
+h3 {
+    margin-top: -15px;
+}
+
 
 select {
     padding: 4px 8px;
