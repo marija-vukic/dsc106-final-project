@@ -45,43 +45,95 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Animation for TMCT (Thinking with numbers)
+    // function animateThinking() {
+    //     clearAnimation();
+    //     const stickFigure = drawStickFigure();
+
+    //     // Move arms to head (thinking)
+    //     stickFigure.leftArm.transition().duration(500).attr("x2", 230).attr("y2", 120);
+    //     stickFigure.rightArm.transition().duration(500).attr("x2", 270).attr("y2", 120);
+
+    //     // Slight head tilt (thinking effect)
+    //     stickFigure.head.transition().duration(500)
+    //         .attr("transform", "rotate(-10, 250, 100)")
+    //         .transition().duration(500)
+    //         .attr("transform", "rotate(10, 250, 100)")
+    //         .transition().duration(500)
+    //         .attr("transform", "rotate(-10, 250, 100)")
+    //         .transition().duration(500)
+    //         .attr("transform", "rotate(0, 250, 100)");
+
+    //     // Floating numbers animation
+    //     for (let i = 0; i < 5; i++) {
+    //         svg.append("text")
+    //             .attr("x", 230 + Math.random() * 40)
+    //             .attr("y", 70 - Math.random() * 30)
+    //             .attr("font-size", "20px")
+    //             .attr("fill", "black")
+    //             .attr("opacity", 0)
+    //             .text(Math.floor(Math.random() * 100)) // Random numbers (i need to fix)
+    //             .transition()
+    //             .duration(1000)
+    //             .attr("y", 40) // Move upwards
+    //             .attr("opacity", 1)
+    //             .transition()
+    //             .duration(500)
+    //             .attr("opacity", 0)
+    //             .remove();
+    //     }
+    // }
+    // Updated TMCT Animation - Centered Numbers
     function animateThinking() {
         clearAnimation();
         const stickFigure = drawStickFigure();
 
         // Move arms to head (thinking)
-        stickFigure.leftArm.transition().duration(500).attr("x2", 230).attr("y2", 120);
-        stickFigure.rightArm.transition().duration(500).attr("x2", 270).attr("y2", 120);
+        stickFigure.leftArm.transition().duration(800).attr("x2", 230).attr("y2", 120);
+        stickFigure.rightArm.transition().duration(800).attr("x2", 270).attr("y2", 120);
 
         // Slight head tilt (thinking effect)
-        stickFigure.head.transition().duration(500)
+        stickFigure.head.transition().duration(800)
             .attr("transform", "rotate(-10, 250, 100)")
-            .transition().duration(500)
+            .transition().duration(800)
             .attr("transform", "rotate(10, 250, 100)")
-            .transition().duration(500)
+            .transition().duration(800)
             .attr("transform", "rotate(-10, 250, 100)")
-            .transition().duration(500)
+            .transition().duration(800)
             .attr("transform", "rotate(0, 250, 100)");
 
-        // Floating numbers animation
-        for (let i = 0; i < 5; i++) {
+        // Floating arithmetic problems animation - Centered above stick figure
+        let startY = 70;
+        let centerX = 250; // Centered X position
+        let spacing = 80; // Adjusted spacing for centering
+        let number = Math.floor(Math.random() * 50) + 50; // Start with a reasonable number
+        let terms = Math.floor(Math.random() * 2) + 2; // Generate 2 or 3 terms max
+
+        for (let i = 0; i < terms; i++) { 
+            let operation = Math.random() < 0.5 ? '-' : '+'; // Randomly choose + or -
+            let operand = Math.floor(Math.random() * 20) + 1; // Operand between 1 and 20
+            let newNumber = operation === '-' ? number - operand : number + operand;
+
             svg.append("text")
-                .attr("x", 230 + Math.random() * 40)
-                .attr("y", 70 - Math.random() * 30)
+                .attr("x", centerX - ((terms - 1) * spacing / 2) + (i * spacing)) // Centered position calculation
+                .attr("y", startY)
                 .attr("font-size", "20px")
                 .attr("fill", "black")
                 .attr("opacity", 0)
-                .text(Math.floor(Math.random() * 100)) // Random numbers (i need to fix)
+                .text(`${number} ${operation} ${operand}`) // Display arithmetic operation
                 .transition()
-                .duration(1000)
+                .delay(i * 1000) // Staggered appearance
+                .duration(2500) // Slow animation
                 .attr("y", 40) // Move upwards
                 .attr("opacity", 1)
                 .transition()
-                .duration(500)
+                .duration(1200)
                 .attr("opacity", 0)
                 .remove();
+
+            number = newNumber; // Update number for next operation
         }
     }
+
 
     // Animation for Real Opinion (Talking)
     function animateTalking() {
